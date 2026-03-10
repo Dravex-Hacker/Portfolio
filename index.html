@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineer | Portfolio</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Inter', 'monospace'],
+                    },
+                    colors: {
+                        primary: '#0ea5e9', // Sky 500
+                        secondary: '#8b5cf6', // Violet 500
+                        dark: {
+                            900: '#0f172a', // Slate 900
+                            800: '#1e293b',
+                            700: '#334155',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- GSAP for Smooth Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body
+    class="bg-dark-900 text-slate-200 font-sans antialiased overflow-x-hidden selection:bg-primary selection:text-white relative">
+
+    <!-- Background Atmospheric Shapes -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px] mix-blend-screen float-anim">
+        </div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary/10 blur-[120px] mix-blend-screen float-anim"
+            style="animation-delay: -3s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-300 bg-transparent py-4 text-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex justify-between items-center relative">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                <div
+                    class="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center font-bold text-sm shadow-lg shadow-primary/30">
+                    SMK
+                </div>
+                <span>Suji<span class="text-primary">.SMK</span></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                <li><a href="#home" class="hover:text-primary transition-colors duration-300">Home</a></li>
+                <li><a href="#about" class="hover:text-primary transition-colors duration-300">About</a></li>
+                <li><a href="#skills" class="hover:text-primary transition-colors duration-300">Skills</a></li>
+                <li><a href="#projects" class="hover:text-primary transition-colors duration-300">Projects</a></li>
+                <li><a href="#experience" class="hover:text-primary transition-colors duration-300">Experience</a></li>
+                <li><a href="#services" class="hover:text-primary transition-colors duration-300">Services</a></li>
+                <li><a href="#contact" class="hover:text-primary transition-colors duration-300">Contact</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-slate-300 hover:text-white focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 w-full glass border-b border-white/10 shadow-2xl py-4 flex flex-col items-center space-y-4">
+            <a href="#home"
+                class="mobile-link text-base font-medium text-slate-300 hover:text-primary transition-colors">Home</a>
+            <a href="#about"
+                class="mobile-link text-base font-medium text-slate-300 hover:text-primary transition-colors">About</a>
+            <a href="#skills"
+                class="mobile-link text-base font-medium text-slate-300 hover:text-primary transition-colors">Skills</a>
+            <a href="#projects"
+                class="mobile-link text-base font-medium text-slate-300 hover:text-primary transition-colors">Projects</a>
+            <a href="#experience"
+                class="mobile-link text-base font-medium text-slate-300 hover:text-primary transition-colors">Experience</a>
+            <a href="#services"
+                class="mobile-link text-base font-medium text-slate-300 hover:text-primary transition-colors">Services</a>
+            <a href="#contact"
+                class="mobile-link text-base font-medium text-slate-300 hover:text-primary transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="min-h-screen pt-28 pb-10 flex items-center relative z-10">
+        <div
+            class="max-w-7xl mx-auto px-6 lg:px-8 w-full flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+            <!-- Text Content -->
+            <div class="flex-1 text-center lg:text-left">
+                <p class="hero-greeting text-primary font-medium tracking-wide uppercase text-sm mb-3">
+                    <i class="fa-solid fa-code mr-2"></i> Welcome to my portfolio
+                </p>
+                <h1 class="hero-name text-5xl md:text-7xl font-bold text-white mb-4 leading-tight tracking-tight">
+                    Hi, I'm <br class="hidden lg:block" />
+                    <span class="text-gradient">Saravanapavananthan Sujipan</span>
+                </h1>
+                <h2
+                    class="hero-role-container text-2xl md:text-3xl font-medium text-slate-300 mb-6 flex items-center justify-center lg:justify-start">
+                    I'm a <span class="typed-text ml-2 text-white font-semibold"></span><span
+                        class="cursor">&nbsp;</span>
+                </h2>
+                <p class="hero-description text-slate-400 text-lg max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+                    I build elegant, scalable, and responsive applications. Specializing in modern web technologies,
+                    Python backends, and full-stack architecture to deliver exceptional user experiences.
+                </p>
+                <div class="hero-buttons flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#projects"
+                        class="px-8 py-3.5 rounded-full bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 flex items-center gap-2 relative overflow-hidden group">
+                        <span class="relative z-10">View Projects</span>
+                        <i
+                            class="fa-solid fa-arrow-right relative z-10 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="S.Sujipan CV.pdf" target="_blank"
+                        class="px-8 py-3.5 rounded-full glass border border-white/10 text-white font-semibold hover:bg-white/5 transition-all duration-300 flex items-center gap-2 hover:border-primary/50">
+                        <span>Download CV</span>
+                        <i class="fa-solid fa-download"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Profile Image -->
+            <div class="hero-image-container flex-1 flex justify-center lg:justify-end">
+                <div class="relative w-72 h-72 md:w-96 md:h-96">
+                    <!-- Glow effect behind image -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-full blur-3xl opacity-30 float-anim">
+                    </div>
+                    <div class="profile-border w-full h-full float-anim">
+                        <!-- Professional Image Placeholder -->
+                        <img src="My.jpg" alt="Saravanapavananthan Sujipan"
+                            class="w-full h-full object-cover shadow-2xl z-10 relative">
+                    </div>
+
+                    <!-- Floating Tech Badges -->
+                    <div class="absolute -top-4 -left-4 bg-dark-800 p-3 rounded-xl border border-white/10 shadow-xl float-anim"
+                        style="animation-delay: -2s;">
+                        <i class="fa-brands fa-python text-3xl text-yellow-400"></i>
+                    </div>
+                    <div class="absolute top-1/2 -right-6 bg-dark-800 p-3 rounded-xl border border-white/10 shadow-xl float-anim"
+                        style="animation-delay: -1s;">
+                        <i class="fa-brands fa-react text-3xl text-sky-400"></i>
+                    </div>
+                    <div class="absolute -bottom-6 left-1/4 bg-dark-800 p-3 rounded-xl border border-white/10 shadow-xl float-anim"
+                        style="animation-delay: -4s;">
+                        <i class="fa-brands fa-js text-3xl text-yellow-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. ABOUT ME -->
+    <section id="about" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal relative">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">About <span class="text-gradient">Me</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Bio & Goals -->
+                <div class="space-y-6 reveal-left">
+                    <h3 class="text-2xl font-semibold text-white">Software Engineering Student & Developer</h3>
+                    <p class="text-slate-400 leading-relaxed text-lg">
+                        I am a passionate Software Engineering student with a deep enthusiasm for building scalable,
+                        high-performance web applications and backend systems. With a strong foundation in modern
+                        programming languages and frameworks, I continuously strive to turn complex problems into
+                        elegant, user-friendly solutions.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed text-lg">
+                        <strong class="text-slate-200">Career Goal:</strong> To secure an internship or junior developer
+                        role where I can contribute to meaningful projects, solve real-world problems, and grow into a
+                        Top-Tier Senior Software Engineer in the tech industry.
+                    </p>
+
+                    <div class="flex gap-4 pt-4">
+                        <div class="glass-card px-6 py-4 rounded-xl text-center flex-1 border-l-4 border-l-primary">
+                            <span class="block text-3xl font-bold text-white mb-1">2+</span>
+                            <span class="text-sm text-slate-400 font-medium">Years Coding</span>
+                        </div>
+                        <div class="glass-card px-6 py-4 rounded-xl text-center flex-1 border-l-4 border-l-secondary">
+                            <span class="block text-3xl font-bold text-white mb-1">10+</span>
+                            <span class="text-sm text-slate-400 font-medium">Projects Done</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Progress Bars -->
+                <div class="glass-card p-8 rounded-2xl reveal-right">
+                    <h3 class="text-xl font-semibold text-white mb-6"><i
+                            class="fa-solid fa-code-branch mr-2 text-primary"></i> Technical Proficiency</h3>
+
+                    <div class="space-y-6">
+                        <!-- Skill 1 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-slate-300">Frontend Development (HTML, CSS, JS,
+                                    React)</span>
+                                <span class="text-sm font-bold text-primary">90%</span>
+                            </div>
+                            <div class="w-full bg-dark-900 rounded-full h-2.5 border border-white/5">
+                                <div class="bg-gradient-to-r from-sky-400 to-primary h-2.5 rounded-full progress-fill"
+                                    data-width="90%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 2 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-slate-300">Backend Development (Node.js,
+                                    Python)</span>
+                                <span class="text-sm font-bold text-primary">80%</span>
+                            </div>
+                            <div class="w-full bg-dark-900 rounded-full h-2.5 border border-white/5">
+                                <div class="bg-gradient-to-r from-sky-400 to-primary h-2.5 rounded-full progress-fill"
+                                    data-width="80%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 3 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-slate-300">UI/UX Design (Figma, Tailwind)</span>
+                                <span class="text-sm font-bold text-primary">85%</span>
+                            </div>
+                            <div class="w-full bg-dark-900 rounded-full h-2.5 border border-white/5">
+                                <div class="bg-gradient-to-r from-sky-400 to-primary h-2.5 rounded-full progress-fill"
+                                    data-width="85%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 4 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-slate-300">Database & Tools (SQL, Firebase,
+                                    Git)</span>
+                                <span class="text-sm font-bold text-primary">75%</span>
+                            </div>
+                            <div class="w-full bg-dark-900 rounded-full h-2.5 border border-white/5">
+                                <div class="bg-gradient-to-r from-sky-400 to-primary h-2.5 rounded-full progress-fill"
+                                    data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. TECH STACK / SKILLS -->
+    <section id="skills" class="py-20 bg-dark-800/30 border-y border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Tech <span class="text-gradient">Stack</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-400 max-w-2xl mx-auto">Technologies and tools I use to build scalable and modern
+                    applications.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <!-- Tech Card -->
+                <div
+                    class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5">
+                    <i
+                        class="fa-brands fa-html5 text-5xl text-orange-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">HTML5</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 50ms;">
+                    <i
+                        class="fa-brands fa-css3-alt text-5xl text-blue-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">CSS3</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 100ms;">
+                    <i class="fa-brands fa-js text-5xl text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">JavaScript</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 150ms;">
+                    <i
+                        class="fa-brands fa-python text-5xl text-yellow-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">Python</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 200ms;">
+                    <i class="fa-brands fa-java text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">Java</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 250ms;">
+                    <i class="fa-brands fa-react text-5xl text-sky-400 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">React</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 300ms;">
+                    <i
+                        class="fa-brands fa-node-js text-5xl text-green-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">Node.js</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 350ms;">
+                    <i
+                        class="fa-brands fa-git-alt text-5xl text-orange-600 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">Git</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 400ms;">
+                    <i class="fa-solid fa-fire text-5xl text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300">Firebase</span>
+                </div>
+                <!-- Tech Card -->
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 reveal-scale group hover:bg-white/5"
+                    style="transition-delay: 450ms;">
+                    <i
+                        class="fa-solid fa-shield-halved text-5xl text-emerald-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium text-slate-300 text-center">Cyber Security</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PROJECTS SECTION -->
+    <section id="projects" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Featured <span
+                        class="text-gradient">Projects</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-400 max-w-2xl mx-auto">Some of my recent academic and personal projects
+                    demonstrating my technical capabilities.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden group reveal-scale">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="absolute inset-0 bg-dark-900/40 group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop"
+                            alt="Hospital Management System"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 z-20 flex gap-2">
+                            <span
+                                class="bg-dark-900/80 backdrop-blur-sm text-xs font-semibold px-3 py-1 rounded-full text-white border border-white/10 shadow-lg">Python
+                                GUI</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                            Hospital Management System</h3>
+                        <p class="text-slate-400 mb-6 line-clamp-3">A comprehensive desktop application built using
+                            Python. Features include patient registration, doctor scheduling, billing management, and
+                            medical records tracking with a clean graphical user interface.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">Python</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">Tkinter</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">SQLite</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="flex-1 glass text-center py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-white/10 transition-colors border-white/10"><i
+                                    class="fa-brands fa-github mr-2"></i> GitHub</a>
+                            <a href="#"
+                                class="flex-1 bg-primary text-center py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-primary/80 transition-colors"><i
+                                    class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden group reveal-scale" style="transition-delay: 100ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="absolute inset-0 bg-dark-900/40 group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <img src="https://plus.unsplash.com/premium_photo-1661962684717-f6ad58e7ebd4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fFNtYXJ0JTIwQWdyaWN1bHR1cmUlMjBNb25pdG9yaW5nfGVufDB8fDB8fHww"
+                            alt="IoT Smart Agriculture"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 z-20 flex gap-2">
+                            <span
+                                class="bg-dark-900/80 backdrop-blur-sm text-xs font-semibold px-3 py-1 rounded-full text-white border border-white/10 shadow-lg">IoT
+                                & Hardware</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Smart
+                            Agriculture Monitoring</h3>
+                        <p class="text-slate-400 mb-6 line-clamp-3">An ongoing IoT system capturing real-time soil
+                            moisture, temperature, and humidity data to optimize crop yielding. Integrated with cloud
+                            backend for data visualization and automated irrigation alerts.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">Arduino</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">C++</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">Sensors</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">IoT</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="flex-1 glass text-center py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-white/10 transition-colors border-white/10"><i
+                                    class="fa-brands fa-github mr-2"></i> GitHub</a>
+                            <a href="#"
+                                class="flex-1 bg-primary text-center py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-primary/80 transition-colors"><i
+                                    class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden group reveal-scale">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="absolute inset-0 bg-dark-900/40 group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop"
+                            alt="Job Portal Web Application"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 z-20 flex gap-2">
+                            <span
+                                class="bg-dark-900/80 backdrop-blur-sm text-xs font-semibold px-3 py-1 rounded-full text-white border border-white/10 shadow-lg">Full
+                                Stack Web</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Job
+                            Portal Web Application</h3>
+                        <p class="text-slate-400 mb-6 line-clamp-3">A platform connecting employers and job seekers.
+                            Features resume parsing, job recommendations based on skills, employer dashboard, and
+                            real-time application tracking system.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">React</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">Node.js</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">MongoDB</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">Express</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="flex-1 glass text-center py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-white/10 transition-colors border-white/10"><i
+                                    class="fa-brands fa-github mr-2"></i> GitHub</a>
+                            <a href="#"
+                                class="flex-1 bg-primary text-center py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-primary/80 transition-colors"><i
+                                    class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="glass-card rounded-2xl overflow-hidden group reveal-scale" style="transition-delay: 100ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="absolute inset-0 bg-dark-900/40 group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=800&auto=format&fit=crop"
+                            alt="Personal Portfolio"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 z-20 flex gap-2">
+                            <span
+                                class="bg-dark-900/80 backdrop-blur-sm text-xs font-semibold px-3 py-1 rounded-full text-white border border-white/10 shadow-lg">Frontend
+                                / UI UX</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                            Personal Portfolio Website</h3>
+                        <p class="text-slate-400 mb-6 line-clamp-3">A highly interactive, modern portfolio designed to
+                            showcase projects and technical skills. Built with advanced CSS techniques (Glassmorphism),
+                            Tailwind CSS, and GSAP animations for a premium feel.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">HTML5/CSS3</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">Tailwind</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">JavaScript</span>
+                            <span
+                                class="px-2 py-1 bg-white/5 text-primary text-xs rounded border border-white/5 font-mono">GSAP</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="flex-1 glass text-center py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-white/10 transition-colors border-white/10"><i
+                                    class="fa-brands fa-github mr-2"></i> GitHub</a>
+                            <a href="#home"
+                                class="flex-1 bg-primary text-center py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-primary/80 transition-colors"><i
+                                    class="fa-solid fa-arrow-up-right-from-square mr-2"></i> You are here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. EXPERIENCE / EDUCATION -->
+    <section id="experience" class="py-20 bg-dark-800/30 border-y border-white/5 relative z-10">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Journey & <span
+                        class="text-gradient">Education</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative border-l-2 border-slate-700 md:border-l-0 md:flex md:flex-col items-center">
+                <!-- Center Line for Desktop -->
+                <div class="hidden md:block absolute h-full w-0.5 bg-slate-700 left-1/2 transform -translate-x-1/2">
+                </div>
+
+                <!-- Education Item -->
+                <div class="mb-12 relative w-full reveal-scale">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-8 md:pl-0 md:w-1/2 md:pr-12 md:text-right ml-auto md:ml-0 md:mr-auto">
+                        <div
+                            class="glass-card p-6 rounded-2xl text-left md:text-right hover:border-primary/50 transition-colors relative">
+                            <span class="text-primary font-bold text-sm mb-1 block font-mono">2022 - Present</span>
+                            <h3 class="text-xl font-bold text-white mb-2">HND in Software Engineering</h3>
+                            <p class="text-sm text-slate-400 mb-3 font-medium">Institution/University Name</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">Focusing on algorithms, data structures,
+                                full-stack development, and modern software architectures. Consistently achieving top
+                                grades in practical assignments.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects/Internship Item -->
+                <div class="mb-12 relative w-full reveal-scale">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-8 md:pl-0 md:w-1/2 md:pl-12 ml-auto">
+                        <div class="glass-card p-6 rounded-2xl hover:border-secondary/50 transition-colors relative">
+                            <span class="text-secondary font-bold text-sm mb-1 block font-mono">2023 - 2024</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Technical Projects & Freelance</h3>
+                            <p class="text-sm text-slate-400 mb-3 font-medium">Remote / Academic</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">Developed various academic and personal
+                                projects including a comprehensive Hospital Management System in Python and a Job Portal
+                                Web Application. Gained hands-on experience in debugging and testing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foundational Item -->
+                <div class="mb-0 relative w-full reveal-scale">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-8 md:pl-0 md:w-1/2 md:pr-12 md:text-right ml-auto md:ml-0 md:mr-auto">
+                        <div
+                            class="glass-card p-6 rounded-2xl text-left md:text-right hover:border-primary/50 transition-colors relative">
+                            <span class="text-primary font-bold text-sm mb-1 block font-mono">2020 - 2022</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Advanced Level Studies</h3>
+                            <p class="text-sm text-slate-400 mb-3 font-medium">High School / College</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">Gained strong analytical and mathematical
+                                skills, laying a solid foundation for computational thinking and logical
+                                problem-solving.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SERVICES SECTION -->
+    <section id="services" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">What I <span class="text-gradient">Do</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-400 max-w-2xl mx-auto">Providing high-quality solutions across various domains in
+                    software engineering.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="glass-card p-8 rounded-2xl group reveal-scale">
+                    <div
+                        class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                        <i class="fa-solid fa-code text-2xl text-primary group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Web Development</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Building responsive, scalable frontend interfaces
+                        and robust backend APIs using modern frameworks like React and Node.js.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 rounded-2xl group reveal-scale" style="transition-delay: 100ms;">
+                    <div
+                        class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary transition-colors">
+                        <i
+                            class="fa-solid fa-pen-nib text-2xl text-secondary group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">UI/UX Design</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Crafting beautiful user interfaces with a focus on
+                        modern aesthetics, usability, and accessibility using tools like Figma.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 rounded-2xl group reveal-scale" style="transition-delay: 200ms;">
+                    <div
+                        class="w-14 h-14 bg-yellow-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-500 transition-colors">
+                        <i
+                            class="fa-brands fa-python text-2xl text-yellow-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Python Applications</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Developing sophisticated desktop applications,
+                        automation scripts, and data processing tools utilizing Python's vast ecosystem.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card p-8 rounded-2xl group reveal-scale">
+                    <div
+                        class="w-14 h-14 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 transition-colors">
+                        <i
+                            class="fa-solid fa-microchip text-2xl text-emerald-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">IoT Projects</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Integrating hardware components with software
+                        systems using microcontrollers like Arduino to bring smart ideas to life.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-card p-8 rounded-2xl group reveal-scale lg:col-span-2"
+                    style="transition-delay: 100ms;">
+                    <div
+                        class="w-14 h-14 bg-rose-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-rose-500 transition-colors">
+                        <i
+                            class="fa-solid fa-graduation-cap text-2xl text-rose-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Assignment Development Support</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-2xl">Assisting peers and juniors in academic
+                        assignments by breaking down complex programming concepts and providing guidance on best coding
+                        practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-dark-800/50 border-t border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div class="reveal-left">
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Let's Work <span
+                            class="text-gradient">Together</span></h2>
+                    <p class="text-slate-400 mb-10 text-lg">Actively looking for internship opportunities and freelance
+                        projects. Feel free to reach out to me.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-5">
+                            <div
+                                class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center text-primary">
+                                <i class="fa-solid fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-slate-400">Email</p>
+                                <a href="mailto:sujipan16@gmail.com"
+                                    class="text-white hover:text-primary transition-colors font-medium text-lg">sujipan16@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-5">
+                            <div
+                                class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center text-green-500">
+                                <i class="fa-brands fa-whatsapp text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-slate-400">WhatsApp</p>
+                                <a href="https://wa.me/94771093957" target="_blank"
+                                    class="text-white hover:text-green-500 transition-colors font-medium text-lg">+94 77
+                                    109 3957</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-5">
+                            <div
+                                class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center text-white">
+                                <i class="fa-brands fa-github text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-slate-400">GitHub</p>
+                                <a href="https://github.com/Dravex-Hacker" target="_blank"
+                                    class="text-white hover:text-gray-300 transition-colors font-medium text-lg">github.com/Dravex-Hacker</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-5">
+                            <div
+                                class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center text-blue-500">
+                                <i class="fa-brands fa-linkedin-in text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-slate-400">LinkedIn</p>
+                                <a href="https://linkedin.com/in/saravanapavananthan-sujipan-4588a930a" target="_blank"
+                                    class="text-white hover:text-blue-400 transition-colors font-medium text-lg">linkedin.com/in/saravanapavananthan-sujipan</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="glass-card p-8 rounded-2xl reveal-right">
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-400 mb-2">Your
+                                    Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg glass-input text-white"
+                                    placeholder="Enter Your Good Name">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-400 mb-2">Email
+                                    Address</label>
+                                <input type="email" id="email"
+                                    class="w-full px-4 py-3 rounded-lg glass-input text-white"
+                                    placeholder="Your Gmail Address">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-slate-400 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg glass-input text-white"
+                                placeholder="How can I help you?">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-400 mb-2">Message</label>
+                            <textarea id="message" rows="5"
+                                class="w-full px-4 py-3 rounded-lg glass-input text-white resize-none"
+                                placeholder="Write your message here..."></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full py-4 rounded-xl bg-primary text-white font-bold text-lg hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/20 flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="glass border-t border-white/10 py-10 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <!-- Brand -->
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-8 h-8 rounded bg-gradient-to-tr from-primary to-secondary flex items-center justify-center font-bold text-xs text-white">
+                    SMK
+                </div>
+                <span class="text-xl font-bold text-white tracking-tight">Suji<span
+                        class="text-primary">.SMK</span></span>
+            </div>
+
+            <!-- Quick Nav -->
+            <ul class="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-400">
+                <li><a href="#about" class="hover:text-primary transition-colors">About</a></li>
+                <li><a href="#projects" class="hover:text-primary transition-colors">Projects</a></li>
+                <li><a href="#services" class="hover:text-primary transition-colors">Services</a></li>
+            </ul>
+
+            <!-- Copyright -->
+            <div class="text-slate-500 text-sm flex gap-4 items-center">
+                <span>&copy; <span id="current-year"></span> All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
