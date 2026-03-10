@@ -225,55 +225,59 @@
                 </div>
 
                 <!-- Interaction Hub -->
-                <div class="mt-12 w-full max-w-2xl reveal mx-auto lg:mx-0">
+                <div class="mt-12 w-full max-w-2xl reveal mx-auto lg:mx-0 px-2 sm:px-0">
                     <div
-                        class="glass-card p-3 md:p-4 rounded-3xl flex flex-col md:flex-row items-stretch md:items-center gap-4 border-white/5">
+                        class="glass-card p-3 md:p-4 rounded-[2rem] flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 border-white/5 shadow-2xl">
 
-                        <!-- Left Stats (Views & Likes) -->
-                        <div class="flex items-center flex-1 divide-x divide-white/10">
+                        <!-- Stats Group -->
+                        <div class="grid grid-cols-2 flex-1 md:flex md:items-center divide-x divide-white/10">
                             <!-- Live Views -->
-                            <div class="flex items-center gap-4 px-4 py-1 flex-1">
+                            <div
+                                class="flex items-center gap-3 md:gap-4 px-3 md:px-4 py-2 justify-center md:justify-start">
                                 <div
-                                    class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-[0_4px_15px_rgba(14,165,233,0.2)]">
-                                    <i class="fa-solid fa-eye animate-pulse text-xl"></i>
+                                    class="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-lg shadow-primary/10">
+                                    <i class="fa-solid fa-eye animate-pulse text-lg md:text-xl"></i>
                                 </div>
                                 <div class="flex flex-col">
                                     <span
-                                        class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-0.5">Views</span>
-                                    <span class="text-2xl font-bold text-white tabular-nums leading-none"
+                                        class="text-[8px] md:text-[10px] font-black uppercase tracking-[0.15em] text-slate-500 mb-0.5">Views</span>
+                                    <span class="text-xl md:text-2xl font-bold text-white tabular-nums leading-none"
                                         id="view-count">0</span>
                                 </div>
                             </div>
 
                             <!-- Appreciations -->
-                            <div class="flex items-center gap-4 px-4 py-1 flex-1">
+                            <div
+                                class="flex items-center gap-3 md:gap-4 px-3 md:px-4 py-2 justify-center md:justify-start">
                                 <button id="like-btn"
-                                    class="w-12 h-12 rounded-2xl glass border border-white/10 flex items-center justify-center text-rose-500 hover:bg-rose-500 hover:text-white hover:shadow-[0_4px_20px_rgba(244,63,94,0.4)] transition-all duration-300 group">
-                                    <i class="fa-regular fa-heart text-xl group-hover:scale-110" id="like-icon"></i>
+                                    class="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl glass border border-white/10 flex items-center justify-center text-rose-500 hover:bg-rose-500 hover:text-white transition-all duration-300 group">
+                                    <i class="fa-regular fa-heart text-lg md:text-xl group-hover:scale-110"
+                                        id="like-icon"></i>
                                 </button>
                                 <div class="flex flex-col">
                                     <span
-                                        class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-0.5">Likes</span>
-                                    <span class="text-2xl font-bold text-white tabular-nums leading-none"
+                                        class="text-[8px] md:text-[10px] font-black uppercase tracking-[0.15em] text-slate-500 mb-0.5">Likes</span>
+                                    <span class="text-xl md:text-2xl font-bold text-white tabular-nums leading-none"
                                         id="like-count">856</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Right Actions (Share & Follow) -->
-                        <div class="flex items-center gap-3 p-1.5 glass rounded-2xl md:rounded-full">
+                        <!-- Actions Group -->
+                        <div class="flex items-center gap-2 p-1.5 glass rounded-2xl md:rounded-full bg-white/5">
                             <!-- Share -->
                             <button id="share-btn"
-                                class="w-11 h-11 rounded-full glass border border-white/10 flex items-center justify-center text-sky-400 hover:bg-sky-400 hover:text-white transition-all duration-300 shadow-xl group"
+                                class="w-10 h-10 md:w-11 md:h-11 rounded-full glass border border-white/10 flex items-center justify-center text-sky-400 hover:bg-sky-400 hover:text-white transition-all duration-300 shadow-lg group flex-shrink-0"
                                 title="Share link">
-                                <i class="fa-solid fa-share-nodes group-hover:rotate-12 transition-transform"></i>
+                                <i
+                                    class="fa-solid fa-share-nodes text-sm md:text-base group-hover:rotate-12 transition-transform"></i>
                             </button>
 
                             <!-- Follow -->
                             <a href="https://github.com/Dravex-Hacker" target="_blank"
-                                class="h-11 px-8 rounded-full bg-white text-dark-900 font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary hover:text-white transition-all duration-300 shadow-xl group">
-                                <i class="fa-brands fa-github text-lg"></i>
-                                <span>Follow Free</span>
+                                class="h-10 md:h-11 px-4 md:px-8 flex-1 md:flex-initial rounded-full bg-white text-dark-900 font-bold text-xs md:text-sm flex items-center justify-center gap-2 hover:bg-primary hover:text-white transition-all duration-300 shadow-lg group">
+                                <i class="fa-brands fa-github text-base md:text-lg"></i>
+                                <span class="whitespace-nowrap">Follow <span class="hidden sm:inline">Free</span></span>
                             </a>
                         </div>
                     </div>
