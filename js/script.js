@@ -194,37 +194,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(initScrollAnimations, 500); // Give DOM time to stabilize
 
-    // Initialize VanillaTilt for advanced 3D hover effects on cards
-    if (typeof VanillaTilt !== "undefined") {
-        VanillaTilt.init(document.querySelectorAll(".glass-card"), {
-            max: 10,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2,
-            perspective: 1000,
-            scale: 1.02
-        });
-    }
 
-    // Custom Cursor tracking logic
-    const cursorDot = document.querySelector(".cursor-dot");
-    const cursorOutline = document.querySelector(".cursor-outline");
 
-    window.addEventListener("mousemove", (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
 
-        if (cursorDot && cursorOutline) {
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            // Use animate for a smoother lag effect on the outline
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        }
-    });
 
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
@@ -366,4 +338,240 @@ document.addEventListener("DOMContentLoaded", () => {
     if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
     }
+
+    // Number Counters Animation
+    const counters = document.querySelectorAll('.counter');
+    if (counters.length > 0) {
+        counters.forEach(counter => {
+            let targetCount = parseInt(counter.getAttribute('data-target'));
+            gsap.fromTo(counter,
+                { innerHTML: 0 },
+                {
+                    innerHTML: targetCount,
+                    duration: 3,
+                    ease: "power1.out",
+                    scrollTrigger: {
+                        trigger: counter,
+                        start: "top 90%",
+                        toggleActions: "play none none reverse"
+                    },
+                    snap: { innerHTML: 1 },
+                    onUpdate: function () {
+                        // GSAP snap handles rounding automatically
+                    }
+                }
+            );
+        });
+    }
+
+
+
+    // Initialize tsParticles Backgorund
+    if (typeof tsParticles !== 'undefined') {
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            particles: {
+                number: {
+                    value: 40,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: { value: "#0ea5e9" },
+                links: {
+                    enable: true,
+                    color: "#334155",
+                    distance: 150,
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: "none",
+                    outModes: "out"
+                },
+                size: {
+                    value: 2,
+                    random: true
+                },
+                opacity: {
+                    value: 0.5
+                }
+            },
+            interactivity: {
+                events: {
+                    onHover: {
+                        enable: true,
+                        mode: "bubble"
+                    }
+                },
+                modes: {
+                    bubble: {
+                        distance: 200,
+                        size: 4,
+                        duration: 2,
+                        opacity: 0.8
+                    }
+                }
+            },
+            detectRetina: true
+        });
+    }
+    // --- Advanced Interactions: Global Persistence ---
+    const viewCountEl = document.getElementById('view-count');
+    const likeBtn = document.getElementById('like-btn');
+    const likeIcon = document.getElementById('like-icon');
+    const likeCountEl = document.getElementById('like-count');
+
+    const NAMESPACE = 'dravex-hacker-portfolio-v1';
+    const BASE_LIKES = 856;
+    let isLiked = localStorage.getItem('portfolio_is_liked') === 'true';
+
+    // 1. Instant UI Initialization from Local Storage
+    if (isLiked && likeBtn && likeIcon) {
+        likeIcon.classList.remove('fa-regular');
+        likeIcon.classList.add('fa-solid');
+        likeBtn.classList.add('!bg-rose-500', '!text-white', '!border-rose-500');
+    }
+
+    // 2. Attach Click Handler Immediately (Don't wait for API)
+    if (likeBtn && likeIcon && likeCountEl) {
+        likeBtn.addEventListener('click', async () => {
+            if (!isLiked) {
+                // UI - Instant Update
+                isLiked = true;
+                localStorage.setItem('portfolio_is_liked', 'true');
+
+                likeIcon.classList.remove('fa-regular');
+                likeIcon.classList.add('fa-solid');
+                likeBtn.classList.add('!bg-rose-500', '!text-white', '!border-rose-500');
+
+                gsap.fromTo(likeIcon,
+                    { scale: 0.5 },
+                    { scale: 1, duration: 0.6, ease: "elastic.out(1, 0.3)" }
+                );
+
+                // API - Update Global Count
+                try {
+                    const res = await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/total_likes/up`);
+                    const data = await res.json();
+                    if (data.count !== undefined) {
+                        likeCountEl.innerHTML = (data.count + BASE_LIKES).toLocaleString();
+                    }
+                } catch (e) { console.error("Global like failed:", e); }
+            } else {
+                // UI - Local Undo (for testing/corrections)
+                isLiked = false;
+                localStorage.removeItem('portfolio_is_liked');
+                likeIcon.classList.remove('fa-solid');
+                likeIcon.classList.add('fa-regular');
+                likeBtn.classList.remove('!bg-rose-500', '!text-white', '!border-rose-500');
+            }
+        });
+    }
+
+    // 3. Fetch Initial Global Data
+    async function initGlobalStats() {
+        try {
+            // Fetch Views (Increment on every visit)
+            const viewRes = await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/page_views/up`);
+            const viewData = await viewRes.json();
+            if (viewCountEl && viewData.count) {
+                gsap.to(viewCountEl, {
+                    innerHTML: viewData.count,
+                    duration: 3,
+                    ease: "power2.out",
+                    snap: { innerHTML: 1 },
+                    onUpdate: function () {
+                        viewCountEl.innerHTML = Number(Math.round(this.targets()[0].innerHTML)).toLocaleString();
+                    }
+                });
+            }
+
+            // Fetch Current Likes
+            const likeRes = await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/total_likes`);
+            const likeData = await likeRes.json();
+            if (likeCountEl && likeData.count !== undefined) {
+                likeCountEl.innerHTML = (likeData.count + BASE_LIKES).toLocaleString();
+            }
+        } catch (error) {
+            console.warn("Global stats fetch failed, using local fallback.");
+            if (viewCountEl) viewCountEl.innerText = "1,542+";
+            if (likeCountEl) likeCountEl.innerText = (isLiked ? BASE_LIKES + 1 : BASE_LIKES).toLocaleString();
+        }
+    }
+
+    initGlobalStats();
+
+    // Advanced Share Modal Logic
+    const shareBtn = document.getElementById('share-btn');
+    const shareModal = document.getElementById('share-modal');
+    const shareModalContent = document.getElementById('share-modal-content');
+    const closeShareModal = document.getElementById('close-share-modal');
+    const shareModalOverlay = document.getElementById('share-modal-overlay');
+
+    if (shareBtn && shareModal) {
+        // Open Modal
+        shareBtn.addEventListener('click', () => {
+            shareModal.classList.remove('hidden');
+            setTimeout(() => {
+                shareModalContent.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        });
+
+        // Close Modal Functions
+        const hideModal = () => {
+            shareModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                shareModal.classList.add('hidden');
+            }, 300);
+        };
+
+        if (closeShareModal) closeShareModal.addEventListener('click', hideModal);
+        if (shareModalOverlay) shareModalOverlay.addEventListener('click', hideModal);
+    }
+
+    // Global Share Function
+    window.shareTo = function (platform) {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent("Check out this amazing developer portfolio!");
+        let shareUrl = '';
+
+        switch (platform) {
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${title}%20${url}`;
+                window.open(shareUrl, '_blank');
+                break;
+            case 'linkedin':
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                window.open(shareUrl, '_blank');
+                break;
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+                window.open(shareUrl, '_blank');
+                break;
+            case 'copy':
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    const icon = document.getElementById('copy-share-icon');
+                    const text = document.getElementById('copy-share-text');
+                    const bg = document.getElementById('copy-icon-bg');
+
+                    if (icon && text && bg) {
+                        icon.className = 'fa-solid fa-check';
+                        text.textContent = 'Copied!';
+                        bg.classList.add('!bg-green-500', '!text-white');
+
+                        setTimeout(() => {
+                            icon.className = 'fa-solid fa-link';
+                            text.textContent = 'Copy Link';
+                            bg.classList.remove('!bg-green-500', '!text-white');
+                        }, 2000);
+                    }
+                });
+                break;
+        }
+    };
+
 });
